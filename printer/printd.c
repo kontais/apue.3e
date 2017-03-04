@@ -541,10 +541,9 @@ add_worker(pthread_t tid, int sockfd)
 	pthread_mutex_lock(&workerlock);
 	wtp->prev = NULL;
 	wtp->next = workers;
-	if (workers == NULL)
-		workers = wtp;
-	else
+	if (workers != NULL)
 		workers->prev = wtp;
+	workers = wtp;
 	pthread_mutex_unlock(&workerlock);
 }
 
@@ -879,7 +878,7 @@ printer_status(int sfd, struct job *jp)
 	int32_t			jobid;
 	ssize_t			nr;
 	char			*bp, *cp, *statcode, *reason, *contentlen;
-	struct ipp_hdr	*hp;
+	struct ipp_hdr	h;
 
 	/*
 	 * Read the HTTP header followed by the IPP response header.
@@ -996,9 +995,9 @@ printer_status(int sfd, struct job *jp)
 				}
 			}
 
-			hp = (struct ipp_hdr *)cp;
-			i = ntohs(hp->status);
-			jobid = ntohl(hp->request_id);
+			memcpy(&h, cp, sizeof(struct ipp_hdr));
+			i = ntohs(h.status);
+			jobid = ntohl(h.request_id);
 
 			if (jobid != jp->jobid) {
 				/*
