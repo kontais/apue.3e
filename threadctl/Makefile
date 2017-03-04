@@ -19,8 +19,8 @@ PROGS =	atfork suspend
 
 all:	$(PROGS) detach.o getenv1.o getenv2.o getenv3.o $(TOUT)
 
-$(PROGS):	$(LIBAPUE)
-		$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
+%:	%.c $(LIBAPUE)
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f $(PROGS) $(TEMPFILES) *.o

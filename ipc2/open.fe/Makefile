@@ -10,9 +10,7 @@ PROGS =	openclient
 
 all:	$(PROGS)
 
-$(PROGS):	$(LIBAPUE)
-
-openclient:	main.o open.o
+openclient:	main.o open.o $(LIBAPUE)
 	$(CC) $(CFLAGS) -o openclient main.o open.o $(LDFLAGS) $(LDLIBS)
 
 clean:

@@ -4,12 +4,6 @@
 /* size of control buffer to send/recv one file descriptor */
 #define	CONTROLLEN	CMSG_LEN(sizeof(int))
 
-#ifdef LINUX
-#define RELOP <
-#else
-#define RELOP !=
-#endif
-
 static struct cmsghdr	*cmptr = NULL;		/* malloc'ed first time */
 
 /*
@@ -57,7 +51,7 @@ recv_fd(int fd, ssize_t (*userfunc)(int, const void *, size_t))
 					err_dump("message format error");
  				status = *ptr & 0xFF;	/* prevent sign extension */
  				if (status == 0) {
-					if (msg.msg_controllen RELOP CONTROLLEN)
+					if (msg.msg_controllen != CONTROLLEN)
 						err_dump("status = 0 but no fd");
 					newfd = *(int *)CMSG_DATA(cmptr);
 				} else {

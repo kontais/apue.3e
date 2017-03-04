@@ -6,8 +6,8 @@ PROGS =	strftime
 
 all:	$(PROGS) getpwnam.o
 
-$(PROGS):	$(LIBAPUE)
-		$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
+%:	%.c $(LIBAPUE)
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f $(PROGS) $(TEMPFILES) *.o

@@ -10,13 +10,11 @@ PROGS = opend.poll opend.select
 
 all:	$(PROGS)
 
-$(PROGS):	$(LIBAPUE)
-
-opend.poll:	main.o request.o cliargs.o client.o loop.poll.o
+opend.poll:	main.o request.o cliargs.o client.o loop.poll.o $(LIBAPUE)
 	$(CC) $(CFLAGS) -o opend.poll main.o cliargs.o client.o request.o loop.poll.o \
 		$(LDFLAGS) $(LDLIBS)
 
-opend.select:	main.o request.o cliargs.o client.o loop.select.o
+opend.select:	main.o request.o cliargs.o client.o loop.select.o $(LIBAPUE)
 	$(CC) $(CFLAGS) -o opend.select main.o cliargs.o client.o request.o loop.select.o \
 		$(LDFLAGS) $(LDLIBS)
 

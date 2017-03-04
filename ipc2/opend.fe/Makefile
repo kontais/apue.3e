@@ -10,9 +10,7 @@ PROGS =	opend
 
 all:	$(PROGS)
 
-$(PROGS):	$(LIBAPUE)
-
-opend:	main.o request.o cliargs.o
+opend:	main.o request.o cliargs.o $(LIBAPUE)
 	$(CC) $(CFLAGS) -o opend main.o cliargs.o request.o $(LDFLAGS) $(LDLIBS)
 
 clean:

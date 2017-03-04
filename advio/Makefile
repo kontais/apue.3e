@@ -20,8 +20,8 @@ rot13c2.c:	rot13c2.c.in $(LIBAPUE)
 	cat xlate >>rot13c2.c
 	sed '1,/same/d' rot13c2.c.in >>rot13c2.c
 
-$(PROGS):	$(LIBAPUE)
-		$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
+%:	%.c $(LIBAPUE)
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f $(PROGS) $(MOREPROGS) $(TEMPFILES) *.o xlate rot13c2.c

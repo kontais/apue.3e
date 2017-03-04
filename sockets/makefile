@@ -11,18 +11,18 @@ MOREPROGS = findsvc ruptime-dg
 
 all:	$(PROGS) $(MOREPROGS) clconn.o clconn2.o initsrv1.o initsrv2.o 
 
-$(PROGS):	$(LIBAPUE)
+%:	%.c $(LIBAPUE)
 
-ruptime:	ruptime.o clconn2.o
+ruptime:	ruptime.o clconn2.o $(LIBAPUE)
 		$(CC) $(CFLAGS) -o ruptime ruptime.o clconn2.o $(LDFLAGS) $(LDLIBS)
 
-ruptimed:	ruptimed.o initsrv2.o
+ruptimed:	ruptimed.o initsrv2.o $(LIBAPUE)
 		$(CC) $(CFLAGS) -o ruptimed ruptimed.o initsrv2.o $(LDFLAGS) $(LDLIBS)
 
-ruptimed-fd:	ruptimed-fd.o initsrv2.o
+ruptimed-fd:	ruptimed-fd.o initsrv2.o $(LIBAPUE)
 		$(CC) $(CFLAGS) -o ruptimed-fd ruptimed-fd.o initsrv2.o $(LDFLAGS) $(LDLIBS)
 
-ruptimed-dg:	ruptimed-dg.o initsrv2.o
+ruptimed-dg:	ruptimed-dg.o initsrv2.o $(LIBAPUE)
 		$(CC) $(CFLAGS) -o ruptimed-dg ruptimed-dg.o initsrv2.o $(LDFLAGS) $(LDLIBS)
 
 clean:

@@ -6,8 +6,8 @@ PROGS =	getcputc hello ls1 mycat shell1 shell2 testerror uidgid
 
 all:	$(PROGS)
 
-$(PROGS):	$(LIBAPUE)
-		$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
+%:	%.c $(LIBAPUE)
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f $(PROGS) $(TEMPFILES) *.o

@@ -12,8 +12,8 @@ PROGS =	buf fgetsfputs getcharbug getcputc mkstemp tempfiles
 
 all:	$(PROGS) $(MEMSTR)
 
-$(PROGS):	$(LIBAPUE)
-		$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
+%:	%.c $(LIBAPUE)
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f $(PROGS) $(TEMPFILES) *.o $(MEMSTR)

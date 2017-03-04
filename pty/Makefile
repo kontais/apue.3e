@@ -10,9 +10,7 @@ PROGS =	pty
 
 all:	$(PROGS)
 
-$(PROGS):	$(LIBAPUE)
-
-pty:	main.o loop.o driver.o
+pty:	main.o loop.o driver.o $(LIBAPUE)
 	$(CC) $(CFLAGS) -o pty main.o loop.o driver.o $(LDFLAGS) $(LDLIBS)
 
 clean:
