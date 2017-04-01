@@ -34,7 +34,9 @@ main(int argc, char *argv[])
 	hint.ai_canonname = NULL;
 	hint.ai_addr = NULL;
 	hint.ai_next = NULL;
-	if ((err = getaddrinfo(argv[1], "ruptime", &hint, &ailist)) != 0)
+    /* need add ruptime to /etc/services */
+	/*if ((err = getaddrinfo(argv[1], "ruptime", &hint, &ailist)) != 0) */
+	if ((err = getaddrinfo(argv[1], "8080", &hint, &ailist)) != 0)
 		err_quit("getaddrinfo error: %s", gai_strerror(err));
 	for (aip = ailist; aip != NULL; aip = aip->ai_next) {
 		if ((sockfd = connect_retry(aip->ai_family, SOCK_STREAM, 0,
@@ -47,3 +49,8 @@ main(int argc, char *argv[])
 	}
 	err_exit(err, "can't connect to %s", argv[1]);
 }
+/*
+need follow command to show server ip
+netstat -nap |grep ruptimed
+./ruptime <ip>
+*/
