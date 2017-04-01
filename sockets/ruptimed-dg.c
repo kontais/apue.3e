@@ -65,7 +65,9 @@ main(int argc, char *argv[])
 	hint.ai_canonname = NULL;
 	hint.ai_addr = NULL;
 	hint.ai_next = NULL;
-	if ((err = getaddrinfo(host, "ruptime", &hint, &ailist)) != 0) {
+    /* need add ruptime to /etc/services */
+    /*if ((err = getaddrinfo(host, "ruptime", &hint, &ailist)) != 0) { */
+    if ((err = getaddrinfo(host, "8080", &hint, &ailist)) != 0) {
 		syslog(LOG_ERR, "ruptimed: getaddrinfo error: %s",
 		  gai_strerror(err));
 		exit(1);
@@ -79,3 +81,8 @@ main(int argc, char *argv[])
 	}
 	exit(1);
 }
+
+/*
+use follow command to show listen ip address
+netstat -ntl
+*/

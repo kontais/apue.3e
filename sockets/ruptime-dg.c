@@ -50,7 +50,9 @@ main(int argc, char *argv[])
 	hint.ai_canonname = NULL;
 	hint.ai_addr = NULL;
 	hint.ai_next = NULL;
-	if ((err = getaddrinfo(argv[1], "ruptime", &hint, &ailist)) != 0)
+    /* need add ruptime to /etc/services */
+	/*if ((err = getaddrinfo(argv[1], "ruptime", &hint, &ailist)) != 0) */
+	if ((err = getaddrinfo(argv[1], "8080", &hint, &ailist)) != 0)
 		err_quit("getaddrinfo error: %s", gai_strerror(err));
 
 	for (aip = ailist; aip != NULL; aip = aip->ai_next) {
@@ -65,3 +67,8 @@ main(int argc, char *argv[])
 	fprintf(stderr, "can't contact %s: %s\n", argv[1], strerror(err));
 	exit(1);
 }
+/*
+need follow command to show server ip
+netstat -nap |grep ruptimed
+./ruptime <ip>
+*/
